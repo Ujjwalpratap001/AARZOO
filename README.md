@@ -6,6 +6,11 @@ UDAAN is a simple and user-friendly productivity app designed to help people org
 
 The app keeps getting started simple: personal or academic details are optional, so users can continue without filling in unnecessary information.
 
+## 📥 Download
+
+- **[Download UDAAN project ZIP](https://github.com/UjjwalPratap001/AARZOO_2-/raw/refs/heads/main/AARZOO_2.zip)** — source project files.
+- **Android APK:** Not available in this repository yet. An installable APK download link will be added once the APK is uploaded.
+
 ## ✨ Features
 
 - **Dashboard:** Get a quick overview of tasks, goals, and progress.
@@ -33,7 +38,7 @@ UDAAN aims to make planning and self-management easier. It brings everyday tasks
 
 This repository contains the source code for the UDAAN application.
 
-> **Note:** Features and availability may vary depending on the current app build. This README describes the app at a high level.
+> **Note:** The ZIP download contains project files, not an installable Android APK. Features and availability may vary depending on the current app build.
 
 ---
 
