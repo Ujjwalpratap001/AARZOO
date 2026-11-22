@@ -19,34 +19,45 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Java 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
 
-      - name: Extract Android project
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: extracted/package-lock.json
+
+      - name: Extract app and install dependencies
         run: |
           mkdir -p extracted
           unzip -q AARZOO_2.zip -d extracted
-          echo "Extracted project files:"
-          find extracted -maxdepth 4 -type f | head -80
+          cd extracted
+          echo "App package configuration:"
+          cat package.json
+          npm install
 
-      - name: Locate Gradle project and build APK
+      - name: Generate Android project and build APK
         run: |
-          WRAPPER="$(find extracted -type f -name gradlew -print -quit)"
-          if [ -z "$WRAPPER" ]; then
-            echo "::error::No Gradle wrapper (gradlew) was found inside AARZOO_2.zip. Upload the complete Android Studio project, including gradlew and gradle/wrapper, then rerun this workflow."
-            exit 1
+          cd extracted
+          if [ ! -d android ]; then
+            CAP_VERSION="$(node -e "const p=require('./package.json'); const v=(p.dependencies||{})['@capacitor/core']||(p.devDependencies||{})['@capacitor/core']; if(!v) process.exit(1); console.log(v.replace(/^[^0-9]*/,''))")"
+            echo "Using Capacitor version: $CAP_VERSION"
+            npm install --no-save "@capacitor/cli@$CAP_VERSION" "@capacitor/android@$CAP_VERSION"
+            npx cap add android
           fi
-          PROJECT_DIR="$(dirname "$WRAPPER")"
-          chmod +x "$WRAPPER"
-          cd "$PROJECT_DIR"
+          npx cap sync android
+          cd android
+          chmod +x gradlew
           ./gradlew --no-daemon assembleDebug
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
         with:
           name: AARZOO-debug-apk
-          path: extracted/**/build/outputs/apk/debug/*.apk
+          path: extracted/android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 30
