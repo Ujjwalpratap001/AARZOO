@@ -4,9 +4,13 @@ UDAAN is a student-focused planning app for organizing daily tasks, upcoming exa
 
 ## 📲 Download UDAAN for Android
 
-**[⬇️ Download UDAAN APK](https://github.com/UjjwalPratap001/AARZOO_2-/releases/latest/download/UDAAN.apk)**
+<p align="center">
+  <a href="https://github.com/UjjwalPratap001/AARZOO_2-/releases/latest/download/UDAAN.apk"><strong>⬇️ Download UDAAN APK</strong></a>
+</p>
 
-💡 **Original Idea & Concept:** [AARZOO](https://github.com/UjjwalPratap001/AARZOO)
+<p align="center">
+  💡 The original idea and concept of this project began as <strong>AARZOO</strong>.
+</p>
 
 Open the link on an Android phone, download the APK, then tap the downloaded file to install it. If Android asks, allow your browser or file manager to install apps from this source.
 
